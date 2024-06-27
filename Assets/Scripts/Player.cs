@@ -7,8 +7,9 @@ using Unity.Netcode;
 
 public class Player : NetworkBehaviour, IKitchenObjectParent
 {
-    //public static Player Instance { get; private set; }
-
+    public static Player LocalInstance { get; private set; }
+    
+    public static event EventHandler OnAnyPlayerSpawned;
     public event EventHandler<OnSelectedCounterChangedEventArgs> OnSelectedCounterChanged;
 
     public class OnSelectedCounterChangedEventArgs : EventArgs
@@ -33,6 +34,15 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         GameInput.Instance.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
     }
 
+    public override void OnNetworkSpawn()
+    {
+        if (IsOwner)
+        {
+            LocalInstance = this;
+        }
+        OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+    }
+
     private void GameInput_OnInteractAction(object sender, EventArgs e)
     {
         if (!KitchenGameManager.Instance.IsGamePlaying()) return; // Cannot interact if the game is not playing
@@ -49,11 +59,6 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         {
             _selectedCounter.InteractAlternate(this);
         }
-    }
-
-    private void Awake()
-    {
-        //Instance = this;
     }
 
     private void Update()
@@ -169,6 +174,11 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         {
             OnPickedSomething?.Invoke(this, EventArgs.Empty);
         }
+    }
+    
+    public static void ResetStaticData()
+    {
+        OnAnyPlayerSpawned = null;
     }
 
     public KitchenObject GetKitchenObject() => _kitchenObject;
