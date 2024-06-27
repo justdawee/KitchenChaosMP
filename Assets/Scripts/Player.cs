@@ -18,6 +18,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
     }
     
     public event EventHandler OnPickedSomething;
+    public static event EventHandler OnAnyPickedSomething;
 
     [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private LayerMask countersLayerMask;
@@ -173,6 +174,7 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         if (kitchenObject != null)
         {
             OnPickedSomething?.Invoke(this, EventArgs.Empty);
+            OnAnyPickedSomething?.Invoke(this, EventArgs.Empty);
         }
     }
     
