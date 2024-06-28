@@ -50,7 +50,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = _fryingTimer / _fryingRecipeSo.fryingTimeMax });
                     if (_fryingTimer > _fryingRecipeSo.fryingTimeMax) // Frying is done?
                     {
-                        GetKitchenObject().DestroySelf(); // Destroy the input
+                        KitchenObject.DestroyKitchenObject(GetKitchenObject()); // Destroy the input
                         KitchenObject.SpawnKitchenObject(_fryingRecipeSo.output, this); // Spawn the output
 
                         state = State.Fried; // Change the state
@@ -65,7 +65,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                     OnProgressChanged?.Invoke(this, new IHasProgress.OnProgressChangedEventArgs { progressNormalized = _burningTimer / _burningRecipeSo.burningTimeMax });
                     if (_burningTimer > _burningRecipeSo.burningTimeMax) // Frying is done?
                     {
-                        GetKitchenObject().DestroySelf(); // Destroy the input
+                        KitchenObject.DestroyKitchenObject(GetKitchenObject()); // Destroy the input
                         KitchenObject.SpawnKitchenObject(_burningRecipeSo.output, this); // Spawn the output
                         state = State.Burned; // Change the state
                         OnStateChanged?.Invoke(this, new OnStateChangedEventArgs {state = state});
@@ -106,7 +106,7 @@ public class StoveCounter : BaseCounter, IHasProgress
                     // Player is holding a plate
                     if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSo()))
                     {
-                        GetKitchenObject().DestroySelf();
+                        KitchenObject.DestroyKitchenObject(GetKitchenObject());
                         
                         state = State.Idle; // Reset the state to Idle
                         OnStateChanged?.Invoke(this, new OnStateChangedEventArgs {state = state});

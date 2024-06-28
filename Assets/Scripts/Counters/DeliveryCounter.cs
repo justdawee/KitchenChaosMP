@@ -21,7 +21,7 @@ namespace Counters
                 if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
                 {
                     DeliveryManager.Instance.DeliverRecipe(plateKitchenObject);
-                    player.GetKitchenObject().DestroySelf();
+                    KitchenObject.DestroyKitchenObject(player.GetKitchenObject());
                 }
             }
         }

@@ -48,7 +48,7 @@ namespace Counters
                         // Player is holding a plate
                         if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSo()))
                         {
-                            GetKitchenObject().DestroySelf();
+                            KitchenObject.DestroyKitchenObject(GetKitchenObject());
                         }
                     }
                 }
@@ -79,7 +79,7 @@ namespace Counters
                 if (_cuttingProgress >= cuttingRecipeSo.cuttingProgressMax) // Cutting is done?
                 {
                     KitchenObjectSO outputKitchenObjectSo = GetOutputForInput(GetKitchenObject().GetKitchenObjectSo()); // Get the output kitchen object for the input kitchen object
-                    GetKitchenObject().DestroySelf(); // Destroy the current kitchen object
+                    KitchenObject.DestroyKitchenObject(GetKitchenObject()); // Destroy the current kitchen object
 
                     KitchenObject.SpawnKitchenObject(outputKitchenObjectSo, this); // Spawn the cutted kitchen object
                 }
