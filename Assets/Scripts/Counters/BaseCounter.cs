@@ -1,4 +1,5 @@
 using System;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Counters
@@ -38,5 +39,10 @@ namespace Counters
         public void ClearKitchenObject() => _kitchenObject = null;
     
         public bool HasKitchenObject() => _kitchenObject != null;
+        
+        public NetworkObject GetNetworkObject()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

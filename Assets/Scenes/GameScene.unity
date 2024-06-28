@@ -4376,6 +4376,74 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 451807930}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &459546013
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459546016}
+  - component: {fileID: 459546014}
+  - component: {fileID: 459546015}
+  m_Layer: 0
+  m_Name: KitchenGameMultiplayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &459546014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459546013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GlobalObjectIdHash: 1450902636
+  InScenePlacedSourceGlobalObjectIdHash: 0
+  AlwaysReplicateAsRoot: 0
+  SynchronizeTransform: 1
+  ActiveSceneSynchronization: 0
+  SceneMigrationSynchronization: 1
+  SpawnWithObservers: 1
+  DontDestroyWithOwner: 0
+  AutoObjectParentSync: 1
+--- !u!114 &459546015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459546013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 70fb4eb5cf0841849b7c7c8fea030c7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  kitchenObjectListSO: {fileID: 11400000, guid: ab032425eea7f6a47b545a78543a9b8d,
+    type: 2}
+--- !u!4 &459546016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459546013}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 983.93225, y: 551.213, z: 0.96900284}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &460714095
 GameObject:
   m_ObjectHideFlags: 0
@@ -8646,7 +8714,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9bfeed481740146a3f33480ec107ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipeListSO: {fileID: 11400000, guid: 8a322379d495cb2428c93c90e4de3cb8, type: 2}
+  recipeListSo: {fileID: 11400000, guid: 8a322379d495cb2428c93c90e4de3cb8, type: 2}
 --- !u!4 &850362935
 Transform:
   m_ObjectHideFlags: 0
@@ -20383,3 +20451,4 @@ SceneRoots:
   - {fileID: 2082627374}
   - {fileID: 1370554650}
   - {fileID: 2059921869}
+  - {fileID: 459546016}
