@@ -1,5 +1,6 @@
 using System;
 using ScriptableObjects;
+using Unity.Netcode;
 using UnityEngine;
 
 namespace Counters
@@ -19,9 +20,20 @@ namespace Counters
             else
             {
                 KitchenObject.SpawnKitchenObject(kitchenObjectSo, player); // Give the kitchen object to the player
-                OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+                InteractLogicServerRpc();
             }
         }
 
+        [ServerRpc(RequireOwnership = false)]
+        private void InteractLogicServerRpc()
+        {
+            InteractLogicClientRpc();
+        }
+
+        [ClientRpc]
+        private void InteractLogicClientRpc()
+        {
+            OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
