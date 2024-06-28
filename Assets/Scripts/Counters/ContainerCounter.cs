@@ -20,18 +20,18 @@ namespace Counters
             else
             {
                 KitchenObject.SpawnKitchenObject(kitchenObjectSo, player); // Give the kitchen object to the player
-                InteractLogicServerRpc();
+                InteractLogicServerRpc(); // Call the server RPC to handle the interaction logic
             }
         }
 
         [ServerRpc(RequireOwnership = false)]
         private void InteractLogicServerRpc()
         {
-            InteractLogicClientRpc();
+            InteractLogicClientRpc(); // Call the client RPC to handle the interaction logic
         }
 
         [ClientRpc]
-        private void InteractLogicClientRpc()
+        private void InteractLogicClientRpc() // Handle the interaction logic
         {
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }

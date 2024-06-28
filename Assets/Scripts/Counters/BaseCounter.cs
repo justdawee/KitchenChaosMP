@@ -16,7 +16,7 @@ namespace Counters
         [SerializeField] private Transform counterTopPoint;
         private KitchenObject _kitchenObject;
     
-        public virtual void Interact(Player player)
+        public virtual void Interact(Player player) 
         {
             Debug.LogError("ERROR: Interact method not implemented!");
         }
@@ -42,7 +42,7 @@ namespace Counters
         
         public NetworkObject GetNetworkObject()
         {
-            return NetworkObject;
+            return NetworkObject; // Return the network object
         }
     }
 }

@@ -22,7 +22,7 @@ public class KitchenObject : NetworkBehaviour
     [ServerRpc(RequireOwnership = false)]
     private void SetKitchenObjectParentServerRpc(NetworkObjectReference IKitchenObjectParentNetworkReference)
     {
-        SetKitchenObjectParentClientRpc(IKitchenObjectParentNetworkReference);
+        SetKitchenObjectParentClientRpc(IKitchenObjectParentNetworkReference); // Call the client RPC to set the kitchen object parent
     }
     
     [ClientRpc]
@@ -50,7 +50,7 @@ public class KitchenObject : NetworkBehaviour
 
     public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
     {
-        SetKitchenObjectParentServerRpc(kitchenObjectParent.GetNetworkObject());
+        SetKitchenObjectParentServerRpc(kitchenObjectParent.GetNetworkObject()); // Call the server RPC to set the kitchen object parent
     }
     
     public bool TryGetPlate(out PlateKitchenObject plateKitchenObject)
