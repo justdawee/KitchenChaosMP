@@ -7,24 +7,49 @@ using UnityEngine;
 public class KitchenObject : NetworkBehaviour
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSo;
-    public KitchenObjectSO GetKitchenObjectSo() => kitchenObjectSo;
+    
+    private FollowTransform _followTransform;
     private IKitchenObjectParent _kitchenObjectParent;
-    public IKitchenObjectParent GetKitchenObjectParent() => _kitchenObjectParent;
-    public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
+    
+    private void Awake()
     {
+        _followTransform = GetComponent<FollowTransform>();
+    }
+    
+    public KitchenObjectSO GetKitchenObjectSo() => kitchenObjectSo;
+    public IKitchenObjectParent GetKitchenObjectParent() => _kitchenObjectParent;
+
+    [ServerRpc(RequireOwnership = false)]
+    private void SetKitchenObjectParentServerRpc(NetworkObjectReference IKitchenObjectParentNetworkReference)
+    {
+        SetKitchenObjectParentClientRpc(IKitchenObjectParentNetworkReference);
+    }
+    
+    private void SetKitchenObjectParentClientRpc(NetworkObjectReference IKitchenObjectParentNetworkReference)
+    {
+        IKitchenObjectParentNetworkReference.TryGet(out NetworkObject IKitchenObjectParentNetworkObject);
+        IKitchenObjectParent kitchenObjectParent = IKitchenObjectParentNetworkObject.GetComponent<IKitchenObjectParent>();
+        
         if (_kitchenObjectParent != null)
         {
             _kitchenObjectParent.ClearKitchenObject();            
         }
+        
         _kitchenObjectParent = kitchenObjectParent; // Set the kitchen object parent of the kitchen object to the new clear counter
+        
         if (kitchenObjectParent.HasKitchenObject())
         {
             Debug.LogError("ERROR: The IKitchenObjectParent already has a kitchen object!");
         }
+        
         kitchenObjectParent.SetKitchenObject(this); // Set the kitchen object of the clear counter to this kitchen object
         
-        //transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform();
-        //transform.position = kitchenObjectParent.GetKitchenObjectFollowTransform().position;
+        _followTransform.SetTargetTransform(kitchenObjectParent.GetKitchenObjectFollowTransform());
+    }
+
+    public void SetKitchenObjectParent(IKitchenObjectParent kitchenObjectParent)
+    {
+        SetKitchenObjectParentServerRpc(kitchenObjectParent.GetNetworkObject());
     }
     
     public bool TryGetPlate(out PlateKitchenObject plateKitchenObject)
