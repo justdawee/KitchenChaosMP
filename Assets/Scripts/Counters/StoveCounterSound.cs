@@ -42,9 +42,9 @@ public class StoveCounterSound : MonoBehaviour
         _playWarningSound = stoveCounter.IsFried() && e.progressNormalized >= burnThreshold;
     }
 
-    private void StoveCounter_OnStateChanged(object sender, StoveCounter.OnStateChangedEventArgs e)
+    private void StoveCounter_OnStateChanged(object sender, StoveCounter.StateChangedEventArgs e)
     {
-        bool playSound = e.state == StoveCounter.State.Frying || e.state == StoveCounter.State.Fried;
+        bool playSound = e.State == StoveCounter.State.Frying || e.State == StoveCounter.State.Fried;
         if (playSound)
         {
             _audioSource.Play();
