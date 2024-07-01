@@ -119,7 +119,7 @@ public class OptionsUI : MonoBehaviour
 
     private void Start()
     {
-        KitchenGameManager.Instance.OnGamePaused += KitchenGameManager_OnGamePaused;
+        KitchenGameManager.Instance.OnLocalGamePaused += KitchenLocalGameManagerOnLocalGamePaused;
         UpdateText();
         UpdateSliders();
         Hide();
@@ -133,7 +133,7 @@ public class OptionsUI : MonoBehaviour
         }
     }
 
-    private void KitchenGameManager_OnGamePaused(object sender, EventArgs e)
+    private void KitchenLocalGameManagerOnLocalGamePaused(object sender, EventArgs e)
     {
         Hide();
     }
