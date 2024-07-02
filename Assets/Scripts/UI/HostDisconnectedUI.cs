@@ -15,27 +15,24 @@ public class HostDisconnectedUI : MonoBehaviour
         });
     }
 
-    private void Start()
-    {
+    private void Start() {
         NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+
         Hide();
     }
 
-    private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
-    {
-        if(clientId == NetworkManager.ServerClientId)
-        {
+    private void NetworkManager_OnClientDisconnectCallback(ulong clientId) {
+        if (clientId == NetworkManager.ServerClientId) {
+            // Server is shutting down
             Show();
         }
     }
 
-    private void Show()
-    {
+    private void Show() {
         gameObject.SetActive(true);
     }
-    
-    private void Hide()
-    {
+
+    private void Hide() {
         gameObject.SetActive(false);
     }
 }
