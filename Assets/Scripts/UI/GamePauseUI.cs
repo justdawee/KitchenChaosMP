@@ -15,6 +15,7 @@ public class GamePauseUI : MonoBehaviour
     {
         resumeButton.onClick.AddListener(() =>
         {
+            NetworkManager.Singleton.Shutdown();
             KitchenGameManager.Instance.PauseGame();
         });
         
