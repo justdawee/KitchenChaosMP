@@ -42,10 +42,26 @@ public class Player : NetworkBehaviour, IKitchenObjectParent
         if (IsOwner)
         {
             LocalInstance = this;
+            Debug.Log("My client ID: " + OwnerClientId);
         }
 
         transform.position = spawnPoints[(int)OwnerClientId];
+        
         OnAnyPlayerSpawned?.Invoke(this, EventArgs.Empty);
+        
+        if (IsServer)
+        {
+            NetworkManager.Singleton.OnClientDisconnectCallback += NetworkManager_OnClientDisconnectCallback;
+            Debug.Log("Server client ID: " + NetworkManager.ServerClientId);
+        }
+    }
+
+    private void NetworkManager_OnClientDisconnectCallback(ulong clientId)
+    {
+        if (clientId == OwnerClientId && HasKitchenObject())
+        {
+            KitchenObject.DestroyKitchenObject(GetKitchenObject());
+        }
     }
 
     private void GameInput_OnInteractAction(object sender, EventArgs e)

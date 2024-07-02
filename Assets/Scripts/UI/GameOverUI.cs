@@ -2,11 +2,21 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameOverUI : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI recipesDeliveredText;
+    [SerializeField] private Button playAgainButton;
+    
+    private void Awake() {
+        playAgainButton.onClick.AddListener(() => {
+            NetworkManager.Singleton.Shutdown();
+            Loader.Load(Loader.Scene.MainMenuScene);
+        });
+    }
     
     private void Start()
     {
@@ -30,6 +40,7 @@ public class GameOverUI : MonoBehaviour
     private void ShowGameover()
     {
         gameObject.SetActive(true);
+        playAgainButton.Select();
     }
     
     private void HideGameOver()
